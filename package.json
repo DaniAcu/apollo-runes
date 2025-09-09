@@ -1,0 +1,29 @@
+{
+  "name": "@dacuna/apollo-runes",
+  "version": "1.0.0",
+  "description": "Apollo Runes workspace with library and documentation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --filter docs dev",
+    "build": "pnpm --filter apollo-runes build && pnpm --filter docs build",
+    "build:lib": "pnpm --filter apollo-runes build",
+    "build:docs": "pnpm --filter docs build",
+    "preview:docs": "pnpm --filter docs preview",
+    "test": "pnpm --filter apollo-runes test",
+    "lint": "pnpm --filter apollo-runes lint",
+    "type-check": "pnpm --filter apollo-runes type-check",
+    "clean": "pnpm -r exec rm -rf dist node_modules",
+    "install:all": "pnpm install"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

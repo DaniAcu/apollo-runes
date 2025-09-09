@@ -1,0 +1,14 @@
+{
+  "name": "@svelte-apollo/docs",
+  "version": "1.0.0",
+  "description": "Documentation for svelte-apollo",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev --host localhost",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.31"
+  }
+}
