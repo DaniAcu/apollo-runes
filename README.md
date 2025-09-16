@@ -1,6 +1,6 @@
 # Apollo runes
 
-![](./packages/apollo-runes/docs/logo.svg)
+<img src="./packages/apollo-runes/docs/logo.svg" width="300" />
 
 ## Quick Start
 

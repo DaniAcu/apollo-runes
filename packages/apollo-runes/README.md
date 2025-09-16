@@ -1,6 +1,6 @@
 # Apollo runes
 
-![](./docs/logo.svg)
+<img src="./docs/logo.svg" width="300" />
 
 ## Quick Start
 
