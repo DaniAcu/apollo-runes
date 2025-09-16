@@ -1,8 +1,9 @@
----
-title: Mutation
----
+# Mutation
 
-## Basic mutation
+The Mutation class runs GraphQL mutations inside Svelte.
+It directly exposes reactive values (loading, error, data) so you can bind them in templates without extra stores or wrappers.
+
+## Usage
 
 ```svelte
 <script lang="ts">
@@ -13,7 +14,7 @@ title: Mutation
     mutation CreatePost($title: String!) { createPost(title: $title) { id title } }
   `;
 
-  const createPost = $derived(new Mutation(CREATE_POST));
+  const createPost = new Mutation(CREATE_POST);
   let title = '';
 
   async function submit() {

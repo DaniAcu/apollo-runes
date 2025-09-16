@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  title: 'Svelte Apollo',
+  title: 'Apollo Runes',
   description: 'Apollo Client integration for Svelte 5 with runes support',
   
   themeConfig: {
@@ -39,7 +39,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-username/svelte-apollo' }
+      { icon: 'github', link: 'https://github.com/DaniAcu/apollo-runes' }
     ],
   }
 })

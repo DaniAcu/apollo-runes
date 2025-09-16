@@ -1,5 +1,12 @@
 :root {
     --vp-c-brand-1: #fd5200;
+    --vp-c-brand-2: #fd7a3b;
+    --vp-c-brand-3: #eb4c00;
+
+    --vp-button-alt-bg: transparent;
+    --vp-button-alt-border: var(--vp-button-alt-text);
+
+    --vp-button-alt-hover-bg: var(--vp-c-bg-alt);
 }
   
 

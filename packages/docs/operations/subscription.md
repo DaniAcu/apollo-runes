@@ -1,8 +1,6 @@
----
-title: Subscription
----
+# Subscription
 
-## Basic subscription
+## Usage
 
 ```svelte
 <script lang="ts">
@@ -10,7 +8,7 @@ title: Subscription
   import { gql } from '@apollo/client';
 
   const NEW_POSTS = gql`subscription { newPost { id title } }`;
-  const sub = $derived(new Subscription(NEW_POSTS, { onData: (d) => console.log('new', d) }));
+  const sub = new Subscription(NEW_POSTS, { onData: (d) => console.log('new', d) });
 </script>
 
 {#if sub.loading} Connecting... {/if}

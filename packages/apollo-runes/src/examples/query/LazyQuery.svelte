@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { gql } from '@apollo/client';
-	import { LazyQuery } from '$lib/operations/query/LazyQuery.js';
+	import { Query } from '$lib/index.js';
 
 	// Snowtooth trails query - this will be loaded lazily
 	let GET_TRAILS = $state(`
@@ -19,7 +19,7 @@
 	const QUERY = $derived(gql(GET_TRAILS));
 
 	// Create lazy query instance
-	const lazyQuery = $derived(new LazyQuery(QUERY));
+	const lazyQuery = $derived(new Query(QUERY, { lazy: true }));
 
 	// State for the lazy query
 	let isExecuted = $state(false);

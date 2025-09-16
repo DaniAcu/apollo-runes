@@ -1,6 +1,4 @@
----
-title: Error Handling
----
+# Error Handling
 
 `apollo-runes` surfaces Apollo errors directly on operation instances.
 

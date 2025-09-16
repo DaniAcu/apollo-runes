@@ -22,7 +22,8 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-.vitepress/cache/
+**/.vitepress/cache/**
 
 # Svelte
 .svelte-kit
+dist

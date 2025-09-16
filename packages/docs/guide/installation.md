@@ -5,18 +5,21 @@
 Install `apollo-runes` and peer dependencies:
 
 ```bash
-pnpm add apollo-runes @apollo/client graphql
+pnpm add apollo-runes @apollo/client graphql rxjs
 # or
-npm i apollo-runes @apollo/client graphql
+npm i apollo-runes @apollo/client graphql rxjs
 # or
-yarn add apollo-runes @apollo/client graphql
+yarn add apollo-runes @apollo/client graphql rxjs
 ```
+
+> Same as [here](https://www.apollographql.com/docs/react/get-started#step-2-install-dependencies) for React
 
 ## Requirements
 
 - Svelte 5
-- Apollo Client v3 or v4 (recommended v4)
+- Apollo Client v4
 - GraphQL JS runtime
+- RxJS
 
 ## Why Apollo Client?
 

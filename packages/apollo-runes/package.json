@@ -18,6 +18,7 @@
     "type-check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "files": [
+    "dist",
     "!dist/**/*.test.*",
     "!dist/**/*.spec.*"
   ],

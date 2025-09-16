@@ -16,7 +16,7 @@
 </script>
 
 <div class="container">
-	<h1>Svelte Apollo Examples</h1>
+	<h1>Apollo Runes Examples</h1>
 	
 	<div class="controls">
 		<button onclick={more}>Add Query Example</button>

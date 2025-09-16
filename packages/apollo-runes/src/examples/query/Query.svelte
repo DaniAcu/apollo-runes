@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { gql } from '@apollo/client';
-	import { Query } from '$lib/operations/query/Query.js';
+	import { Query } from '$lib/index.js';
 
     // Snowtooth lifts query
 	let GET_LIFTS = $state(`
@@ -66,9 +66,9 @@
 			<div class="lifts-grid">
 				{#each lifts as lift}
 					<div class="lift-card">
-						<h3 class="lift-name">{lift.name}</h3>
+						<h3 class="lift-name">{lift!.name}</h3>
 						<div class="lift-details">
-							<span class="status status-{lift.status?.toLowerCase()}">{lift.status}</span>
+							<span class="status status-{lift!.status?.toLowerCase()}">{lift.status}</span>
 							<span class="capacity">👥 {lift.capacity}</span>
 							<span class="elevation">⛰️ {lift.elevationGain}ft</span>
 						</div>

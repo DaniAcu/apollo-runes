@@ -125,7 +125,6 @@ export class Mutation<TData = any, TVariables extends OperationVariables = Opera
 		const prevState = this._state;
 		this._state = newState;
 		
-		// Use @wry/equality for deep equality comparison
 		if (!equal(prevState, this._state)) {
 			this._next();
 		}
