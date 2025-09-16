@@ -1,6 +1,9 @@
 {
   "name": "apollo-runes",
   "version": "0.0.1",
+  "license": "MIT",
+  "author": "Daniel Nahuel Acula <danielnahuelacuna98@gmail.com> (https://github.com/DaniAcu)",
+	"repository": "github:DaniAcu/apollo-runes",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run prepack",
