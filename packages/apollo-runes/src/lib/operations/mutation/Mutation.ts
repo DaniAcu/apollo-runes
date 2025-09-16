@@ -24,7 +24,7 @@ import { ApolloClientContext } from '../../provider/context.js';
 
 type NoInfer<T> = [T][T extends any ? 0 : never];
 
-export interface MutationState<TData = any> {
+interface MutationState<TData = any> {
 	data: MaybeMasked<TData> | null | undefined;
 	loading: boolean;
 	error: ErrorLike | undefined;

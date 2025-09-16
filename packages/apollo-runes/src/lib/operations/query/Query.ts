@@ -1,11 +1,11 @@
 import { createSubscriber } from 'svelte/reactivity';
-import { type ApolloClient, type DocumentNode, type ObservableQuery, type UpdateQueryMapFn, type OperationVariables, type TypedDocumentNode, gql } from '@apollo/client/core';
+import { type ApolloClient, type DocumentNode, type ObservableQuery, type UpdateQueryMapFn, type OperationVariables, type TypedDocumentNode, type NetworkStatus, type ErrorLike } from '@apollo/client/core';
 import type { DeepPartial } from '@apollo/client/utilities';
 import { observeOn, asapScheduler } from 'rxjs'
 
 import { ApolloClientContext } from '../../provider/context.js';
 
-type Options<TData, TVariables extends OperationVariables> = Partial<
+export type QueryOptions<TData, TVariables extends OperationVariables> = Partial<
 	Omit<ApolloClient.WatchQueryOptions<TData, TVariables>, 'query'> & { client: ApolloClient; lazy?: boolean }
 >;
 
@@ -34,7 +34,7 @@ class BaseQuery<TData = any, TVariables extends OperationVariables = OperationVa
 
 	constructor(
 		protected query: DocumentNode | TypedDocumentNode<TData, TVariables>,
-		protected options?: Options<TData, TVariables>
+		protected options?: QueryOptions<TData, TVariables>
 	) {
 		this.client = options?.client || ApolloClientContext.get();
 		this._isLazy = options?.lazy === true;
@@ -75,33 +75,33 @@ class BaseQuery<TData = any, TVariables extends OperationVariables = OperationVa
 		this.subscribeToMore = this.observable.subscribeToMore.bind(this.observable);
 	}
 
-	// Getters
-	get variables() {
+	// Getters with explicit type annotations
+	get variables(): TVariables | undefined {
 		this._subscribe();
 		return this.observable?.variables;
 	}
 
-	get data() {
+	get data(): TData | DeepPartial<TData> | undefined {
 		this._subscribe();
 		return this._result?.data;
 	}
 
-	get loading() {
+	get loading(): boolean | undefined {
 		this._subscribe();
 		return this._result?.loading;
 	}
 
-	get error() {
+	get error(): ErrorLike | undefined {
 		this._subscribe();
 		return this._result?.error;
 	}
 
-	get dataState() {
+	get dataState(): "empty" | "complete" | "streaming" | "partial" | undefined {
 		this._subscribe();
 		return this._result?.dataState;
 	}
 
-	get networkStatus() {
+	get networkStatus(): NetworkStatus | undefined {
 		this._subscribe();
 		return this._result?.networkStatus;
 	}
@@ -109,9 +109,9 @@ class BaseQuery<TData = any, TVariables extends OperationVariables = OperationVa
 
 // Query class with execute method
 class LazyQuery<TData = any, TVariables extends OperationVariables = OperationVariables> extends BaseQuery<TData, TVariables> {
-	execute(options?: Options<TData, TVariables>): Promise<ObservableQuery.Result<TData, "empty" | "complete" | "streaming" | "partial">> {
+	execute(options?: QueryOptions<TData, TVariables>): Promise<ObservableQuery.Result<TData, "empty" | "complete" | "streaming" | "partial">> {
 		return new Promise<ObservableQuery.Result<TData, "empty" | "complete" | "streaming" | "partial">>(resolve => {
-			this.options = { ...this.options, ...options } as Options<TData, TVariables>;
+			this.options = { ...this.options, ...options } as QueryOptions<TData, TVariables>;
 			this._execute();
 			this._isExecuted = true;
 
@@ -130,8 +130,8 @@ class LazyQuery<TData = any, TVariables extends OperationVariables = OperationVa
 }
 
 // Type definitions for constructor overloads
-type OptionsWithExecute<TData, TVariables extends OperationVariables> = Options<TData, TVariables> & { lazy: true };
-type OptionsWithoutExecute<TData, TVariables extends OperationVariables> = Options<TData, TVariables> & { lazy?: false };
+type OptionsWithExecute<TData, TVariables extends OperationVariables> = QueryOptions<TData, TVariables> & { lazy: true };
+type OptionsWithoutExecute<TData, TVariables extends OperationVariables> = QueryOptions<TData, TVariables> & { lazy?: false };
 
 // Hybrid constructor interface
 interface QueryConstructor {
@@ -149,10 +149,11 @@ interface QueryConstructor {
 export const Query: QueryConstructor = function <TData = any, TVariables extends OperationVariables = OperationVariables>(
 	this: any,
 	query: DocumentNode | TypedDocumentNode<TData, TVariables>,
-	options?: Options<TData, TVariables>
+	options?: QueryOptions<TData, TVariables>
 ) {
 	if (options?.lazy === true) {
 		return new LazyQuery(query, options);
 	}
 	return new BaseQuery(query, options);
 } as any;
+export type Query = typeof Query;
