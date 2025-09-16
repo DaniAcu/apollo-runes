@@ -1,4 +1,5 @@
-# Apollo runes
+# Apollo Runes
+![npm](https://img.shields.io/npm/v/apollo-runes?colorA=fd5200&colorB=000000)
 
 <img src="./packages/apollo-runes/docs/logo.svg" width="300" />
 
