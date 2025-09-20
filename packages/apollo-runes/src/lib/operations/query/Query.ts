@@ -6,7 +6,11 @@ import { observeOn, asapScheduler } from 'rxjs'
 import { ApolloClientContext } from '../../provider/context.js';
 
 export type QueryOptions<TData, TVariables extends OperationVariables> = Partial<
-	Omit<ApolloClient.WatchQueryOptions<TData, TVariables>, 'query'> & { client: ApolloClient; lazy?: boolean }
+	Omit<ApolloClient.WatchQueryOptions<TData, TVariables>, 'query'> & {
+		client: ApolloClient;
+		initialData?: TData; 
+		lazy?: boolean
+	}
 >;
 
 // Base query class without execute method
@@ -39,6 +43,8 @@ class BaseQuery<TData = any, TVariables extends OperationVariables = OperationVa
 		this.client = options?.client || ApolloClientContext.get();
 		this._isLazy = options?.lazy === true;
 
+		this.initializeCacheWithInitialData();
+
 		this._subscribe = createSubscriber((update) => {
 			this._next = update;
 			// stop listening when all the effects are destroyed
@@ -49,6 +55,19 @@ class BaseQuery<TData = any, TVariables extends OperationVariables = OperationVa
 		if (!this._isLazy) {
 			this._execute();
 		}
+		
+	}
+
+	private initializeCacheWithInitialData() {
+		const { initialData = null, ...options } = this.options || {};
+
+		if (!initialData) return;
+
+		this.client.writeQuery<TData, TVariables>({
+			query: this.query,
+			data: initialData,
+			...this.options
+		} as any);
 	}
 
 	protected _execute() {
