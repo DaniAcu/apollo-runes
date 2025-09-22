@@ -26,6 +26,9 @@ features:
   - icon: 🎯
     title: TypeScript First
     details: Full TypeScript support with type safety, autocompletion, and a smooth developer experience.
+  - icon: 🌐
+    title: SSR
+    details: Integrated with SSR to have a performant experience
 
 ---
 
